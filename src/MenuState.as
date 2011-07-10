@@ -6,7 +6,7 @@ package
     {
         override public function create():void
         {
-            var t:FlxText = new FlxText(0,FlxG.height-40,256,"PUSH START BUTTON");
+            var t:FlxText = new FlxText(0,186,256,"PUSH START BUTTON");
             t.alignment = "center";
             t.setFormat("NES");
             add(t);
