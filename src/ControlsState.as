@@ -14,7 +14,10 @@ package
 
         override public function create():void
         {
-            _t = new FlxText(0,186,256, "");
+            var controlsSprite:ControlsSprite = new ControlsSprite();
+            add(controlsSprite);
+
+            _t = new FlxText(0,220,256, "");
             _t.alignment = "center";
             _t.setFormat("NES");
             add(_t);
