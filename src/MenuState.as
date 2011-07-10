@@ -1,32 +1,22 @@
 package
 {
-	import org.flixel.*;
+    import org.flixel.*;
 
-	public class MenuState extends FlxState
-	{
-		override public function create():void
-		{
-			var t:FlxText;
-			t = new FlxText(0,FlxG.height/2-10,FlxG.width,"dgtk");
-			t.size = 16;
-			t.alignment = "center";
-			add(t);
-			t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"click to play");
-			t.alignment = "center";
-			add(t);
-			
-			FlxG.mouse.show();
-		}
+    public class MenuState extends FlxState
+    {
+        override public function create():void
+        {
+            var t:FlxText = new FlxText(0,FlxG.height-40,256,"PUSH START BUTTON");
+            t.alignment = "center";
+            t.setFormat("NES");
+            add(t);
+        }
 
-		override public function update():void
-		{
-			super.update();
+        override public function update():void
+        {
+            super.update();
 
-			if(FlxG.mouse.justPressed())
-			{
-				FlxG.mouse.hide();
-				FlxG.switchState(new PlayState());
-			}
-		}
-	}
+		    //FlxG.switchState(new PlayState());
+        }
+    }
 }
