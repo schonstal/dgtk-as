@@ -6,6 +6,7 @@ package
 
 	public class dgtk extends FlxGame
 	{
+        [Embed(source = '../data/PressStart2P.ttf', fontFamily="NES", embedAsCFF="false")] public var PressStartFont:String;
 		public function dgtk()
 		{
 			super(256,240,MenuState,2);
