@@ -9,8 +9,13 @@ package
         private var _startText:String = "PUSH START BUTTON";
         private var _t:FlxText;
 
+        private var _title:TitleSprite;
+
         override public function create():void
         {
+            _title = new TitleSprite();
+            add(_title);
+
             _t = new FlxText(0,186,256, _startText);
             _t.alignment = "center";
             _t.setFormat("NES");
