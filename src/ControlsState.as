@@ -17,7 +17,7 @@ package
             var controlsSprite:ControlsSprite = new ControlsSprite();
             add(controlsSprite);
 
-            _t = new FlxText(0,220,256, "");
+            _t = new FlxText(0,214,256, "");
             _t.alignment = "center";
             _t.setFormat("NES");
             add(_t);
