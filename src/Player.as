@@ -6,11 +6,16 @@ package
     {
         public var mobile:Boolean = true;
         public var heading:uint = RIGHT;
+        public var automated:Boolean = true;
+        public var got_key:Boolean = false;
 
         [Embed(source='../data/character.png')] private var ImgPlayer:Class;
         private var _move_speed:int = 50;
-        private var _get_key:Boolean = false;
         private var _walkFPS:int = 3;
+
+        public function get move_speed():int {
+            return _move_speed; 
+        } 
 
         public function Player(X:Number,Y:Number):void
         {
@@ -60,7 +65,7 @@ package
                 } else {
                     velocity.y = 0;
                 }
-            } else {
+            } else if(!automated) {
                 velocity.x = 0;
                 velocity.y = 0;
             }
@@ -81,24 +86,28 @@ package
                         break;
                 }
             } else {
-                switch(heading) {
-                    case LEFT:
-                        play("stop_left");
-                        break;
-                    case RIGHT:
-                        play("stop_right");
-                        break;
-                    case UP:
-                        play("stop_up");
-                        break;
-                    case DOWN:
-                        play("stop_down");
-                        break;
+                if(!got_key) {
+                    switch(heading) {
+                        case LEFT:
+                            play("stop_left");
+                            break;
+                        case RIGHT:
+                            play("stop_right");
+                            break;
+                        case UP:
+                            play("stop_up");
+                            break;
+                        case DOWN:
+                            play("stop_down");
+                            break;
+                    }
+                } else {
+                  play("got_key");
                 }
             }
 
             super.update();
         }
-
+  
     }
 }
