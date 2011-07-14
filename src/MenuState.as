@@ -11,11 +11,17 @@ package
 
         private var _title:TitleSprite;
         private var _player:Player;
+        private var _background:BackgroundSprite;
 
         private var _started:Boolean = false;
 
         override public function create():void
         {
+            FlxG.flash(0xff000000, 1);
+
+            _background = new BackgroundSprite();
+            add(_background);
+
             _player = new Player(-150, 136);
             _player.automated = true;
             _player.heading = FlxObject.RIGHT;
