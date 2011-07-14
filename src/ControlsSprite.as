@@ -7,7 +7,7 @@ package
         [Embed(source = "../data/controls.png")] private var ImgControls:Class;
         public function ControlsSprite() {
             super(0, 0);
-            loadGraphic(ImgControls, true, true, 320, 240);
+            loadGraphic(ImgControls, true, true, 256, 240);
         }
     }
 }
