@@ -38,7 +38,7 @@ package
             super.update();
             
             if(FlxG.keys.justPressed("X")) {
-                FlxG.fade(0xff000000, 1, function():void { FlxG.switchState(new WalkInState()); });
+                FlxG.fade(0xff000000, 1, function():void { FlxG.switchState(new BlackState()); });
             }
         }
     }

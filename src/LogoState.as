@@ -9,6 +9,7 @@ package
 
         override public function create():void
         {
+          FlxG.level = 1;
           var logoSprite:LogoSprite = new LogoSprite();
           add(logoSprite);
 
