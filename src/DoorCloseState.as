@@ -4,6 +4,8 @@ package
 
 	public class DoorCloseState extends FlxState
 	{
+        [Embed(source="../data/Sounds_package.swf", symbol="door_close.wav")] public var DoorClose:Class;
+        
         private var _player:Player;
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
@@ -35,15 +37,10 @@ package
                     _doorAppeared = true;
                     _door = new DoorSprite();
                     add(_door);
+                    
+                    FlxG.shake(0.005, 0.3, function():void { FlxG.switchState(new PlayState()) });
+                    FlxG.play(DoorClose, 1);
                 }
-
-                if(_door.finished) {
-                    if(!_shaking) {
-                        FlxG.shake(0.005, 0.3, function():void { FlxG.switchState(new PlayState()) });
-                        _shaking = true;
-                    }
-                }
-                
             }
             super.update();
         }

@@ -4,6 +4,9 @@ package
 
     public class Player extends FlxSprite
     {
+        [Embed(source="../data/Sounds_package.swf", symbol="walk1.wav")] public var Walk1:Class;
+        [Embed(source="../data/Sounds_package.swf", symbol="walk2.wav")] public var Walk2:Class;
+
         public var mobile:Boolean = true;
         public var heading:uint = RIGHT;
         public var automated:Boolean = true;
@@ -12,6 +15,9 @@ package
         [Embed(source='../data/character.png')] private var ImgPlayer:Class;
         private var _move_speed:int = 50;
         private var _walkFPS:int = 3;
+
+        private var _walkFrame:int = 0;
+        private var _walkSounds:Array;
 
         public function get move_speed():int {
             return _move_speed; 
@@ -34,12 +40,21 @@ package
             
             addAnimation("got_key", [6]);
 
+            _walkSounds = [Walk1, Walk2];
+
             width = 8;
             height = 8;
             offset.x = 4;
             offset.y = 4;
 
             heading = RIGHT;
+
+            addAnimationCallback(function(id:String, frameNumber:uint, frameIndex:uint):void {
+                if(frameIndex != 6 && (FlxG.keys.UP || FlxG.keys.DOWN || FlxG.keys.RIGHT || FlxG.keys.LEFT)) {
+                    _walkFrame = ++_walkFrame % 2;
+                    FlxG.play(_walkSounds[_walkFrame]);
+                }
+            });
         }
 
         override public function update():void

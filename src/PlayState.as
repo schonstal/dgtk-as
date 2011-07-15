@@ -17,6 +17,7 @@ package
             add(_background);
 
             _door = new DoorSprite();
+            _door.play("closed");
             add(_door);
 
             _player = new Player(58, 136);

@@ -6,13 +6,16 @@ package
     {
         [Embed(source = "../data/door.png")] private var ImgDoor:Class;
         public function DoorSprite() {
-            super(0, 0);
+            super(16, 128);
             loadGraphic(ImgDoor, true, true, 16, 32);
-            addAnimation("close", [0, 1, 1], 15, false);
+
+            addAnimation("close", [0, 1], 15, false);
+            addAnimation("closed", [1], 15, false);
+
+            play("close");
         }
         
         override public function update():void {
-            play("close");
         }
     }
 }
