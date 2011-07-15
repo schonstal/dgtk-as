@@ -35,7 +35,7 @@ package
 
             if(_background.x <= -256) {
                 _background.velocity.x = 0;
-                //switch states
+                FlxG.switchState(new DoorCloseState());
             }
             super.update();
         }
