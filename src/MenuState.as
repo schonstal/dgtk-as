@@ -25,63 +25,48 @@ package
 
         override public function create():void
         {
-            FlxG.flash(0xff000000, 1);
-
             _background = new BackgroundSprite();
             add(_background);
 
-            _player = new Player(-150, 136);
-            _player.automated = true;
-            _player.heading = FlxObject.RIGHT;
-            _player.velocity.x = _player.move_speed;
+            _player = new Player(128, 136);
             _player.mobile = false;
+            _player.got_key = true;
             add(_player);
+            
+            _title = new TitleSprite();
+            add(_title);
+
+            _t = new FlxText(0,186,256, _startText);
+            _t.alignment = "center";
+            _t.setFormat("NES");
+            add(_t);
+
+            FlxG.flash(0xffffffff, 0.25);
         }
 
         override public function update():void
         {
-            if(_player.x >= 128) {
-                if(!_started) {
-                    _player.velocity.x = 0;
-                    _startTimer += FlxG.elapsed;
-                    if(_startTimer > _startThreshold) {
-                        _player.got_key = true;
-                        _title = new TitleSprite();
-                        add(_title);
-
-                        _t = new FlxText(0,186,256, _startText);
-                        _t.alignment = "center";
-                        _t.setFormat("NES");
-                        add(_t);
-
-                        FlxG.flash(0xffffffff, 0.25);
-
-                        _started = true;
-                      }
-                } else {
-                    _elapsed += FlxG.elapsed;
-                    if(_elapsed >= _startFlashRate && !_flashing) {
-                        _elapsed = 0;
-                        _t.text = (_t.text == "" ? _startText : "");
-                    }
-                    if(FlxG.keys.SPACE) {
-                        _t.text = _startText; //Just in case...
-                        _t.flicker(_flickerThreshold);
-                        remove(_title);
-                        if(!_flashing) {
-                            var flashingTitle:FlashingTitleSprite = new FlashingTitleSprite();
-                            add(flashingTitle);
-                            _spacePressed = true;
-                        }
-                        _flashing = true;
-                    }
-
-                    if(_spacePressed) {
-                        _flickerTimer += FlxG.elapsed;
-                        if(_flickerTimer >= _flickerThreshold)
-                            FlxG.switchState(new WalkRightState());
-                    }
+            _elapsed += FlxG.elapsed;
+            if(_elapsed >= _startFlashRate && !_flashing) {
+                _elapsed = 0;
+                _t.text = (_t.text == "" ? _startText : "");
+            }
+            if(FlxG.keys.SPACE) {
+                _t.text = _startText; //Just in case...
+                _t.flicker(_flickerThreshold);
+                remove(_title);
+                if(!_flashing) {
+                    var flashingTitle:FlashingTitleSprite = new FlashingTitleSprite();
+                    add(flashingTitle);
+                    _spacePressed = true;
                 }
+                _flashing = true;
+            }
+
+            if(_spacePressed) {
+                _flickerTimer += FlxG.elapsed;
+                if(_flickerTimer >= _flickerThreshold)
+                    FlxG.switchState(new WalkRightState());
             }
             super.update();
 		    //FlxG.switchState(new PlayState());
