@@ -21,7 +21,7 @@ package
             _door.play("closed");
             add(_door);
 
-            _player = new Player(58, 136);
+            _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = FlxObject.RIGHT;
             add(_player);
 

@@ -121,6 +121,9 @@ package
                 }
             }
 
+            GameTracker.playerPos.x = x;
+            GameTracker.playerPos.y = y;
+
             super.update();
         }
   

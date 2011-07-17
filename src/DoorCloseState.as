@@ -25,6 +25,7 @@ package
             _player.heading = FlxObject.RIGHT;
             _player.mobile = false;
             add(_player);
+
         }
 
         override public function update():void

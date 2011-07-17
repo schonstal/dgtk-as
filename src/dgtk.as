@@ -10,7 +10,7 @@ package
 		public function dgtk()
 		{
 			super(256,240,LogoState,2);
-            //super(256,240,MenuState,2);
+            //super(256,240,PlayState,2);
 		}
 	}
 }
