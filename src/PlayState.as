@@ -31,6 +31,10 @@ package
 
         override public function update():void
         {
+            //Dad, are you space?
+            if(FlxG.keys.SPACE)
+                FlxG.switchState(new SlideUpState());
+
             super.update();
         }
 	}
