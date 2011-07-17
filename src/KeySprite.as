@@ -15,19 +15,19 @@ package
         public const VELOCITY:Number = 0.5;
         
         public function KeySprite(X:Number, Y:Number, ThePlayer:Player):void {
-            super(X+6,Y+4);
+            super(X+4,Y+10);
             _player = ThePlayer;
             loadGraphic(ImgKey, true, true, 16, 16);
-            width = 4;
-            height = 8;
-            offset.x = 6;
-            offset.y = 4;
+            width = 8;
+            height = 6;
+            offset.x = 4;
+            offset.y = 10;
         }
 
         override public function update():void {
             _elapsed += FlxG.elapsed;
 
-            if (_elapsed >= VELOCITY) {
+            if (_elapsed >= VELOCITY && floating) {
                 if (_frame <= 1)
                     y++;
                 else if (_frame <= 3)
