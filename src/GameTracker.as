@@ -4,8 +4,14 @@ package
 
     public class GameTracker
     {
+        //Persist player position between states
         public var _playerPos:FlxPoint;
+
+        //Persist the time remaining between states
         public var _timeRemaining:Number;
+
+        //Persist the player heading between states
+        public var _heading:uint;
 
         private static var _instance:GameTracker = null;
 
@@ -36,6 +42,14 @@ package
 
         public static function set timeRemaining(value:Number):void {
             instance._timeRemaining = value;
+        }
+
+        public static function get heading():uint {
+            return instance._heading;
+        }
+
+        public static function set heading(value:uint):void {
+            instance._heading = value;
         }
     }
 }

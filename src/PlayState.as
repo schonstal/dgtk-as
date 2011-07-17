@@ -22,7 +22,7 @@ package
             add(_door);
 
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
-            _player.heading = FlxObject.RIGHT;
+            _player.heading = GameTracker.heading;
             add(_player);
 
             _key = new KeySprite(120, 132, _player);
