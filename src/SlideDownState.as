@@ -4,6 +4,7 @@ package
 
 	public class SlideDownState extends FlxState
 	{
+        [Embed(source="../data/Sounds_package.swf", symbol="sad_pause.wav")] public var SadPauseSound:Class;
         private var _background:BackgroundSprite;
         private var _velocity:Number = 150;
 
@@ -11,6 +12,8 @@ package
         {
             _background = new BackgroundSprite(-256, 0);
             add(_background);
+            
+            FlxG.play(SadPauseSound, 1);
         }
 
         override public function update():void
