@@ -8,6 +8,7 @@ package
         private var _key:KeySprite;
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
+        private var _chest:ChestSprite;
         
         private var _doorAppeared:Boolean = false; 
 
@@ -27,6 +28,9 @@ package
 
             _key = new KeySprite(120, 132, _player);
             add(_key);
+            
+            _chest = new ChestSprite();
+            add(_chest);
         }
 
         override public function update():void
