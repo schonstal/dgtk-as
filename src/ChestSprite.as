@@ -8,6 +8,8 @@ package
         public function ChestSprite() {
             super(208, 136);
             loadGraphic(ImgChest, true, true, 16, 16);
+
+            immovable = true;
         }
         
         override public function update():void {

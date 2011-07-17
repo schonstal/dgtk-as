@@ -9,8 +9,14 @@ package
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
         private var _chest:ChestSprite;
+
+        private var _activeMessage:FlxText;
+        private var _passiveMessage:FlxText;
+
+        private var _chestPad:Array = [];
         
         private var _doorAppeared:Boolean = false; 
+        private var _messageActive:Boolean = false;
 
         override public function create():void
         {
@@ -21,25 +27,73 @@ package
             _door = new DoorSprite();
             _door.play("closed");
             add(_door);
+            
+            _chest = new ChestSprite();
+            add(_chest);
+
+            _chestPad['left'] = new FlxObject(_chest.x - 4, _chest.y, 4, 16);
+            _chestPad['top'] = new FlxObject(_chest.x, _chest.y - 4, 16, 4);
+            _chestPad['bottom'] = new FlxObject(_chest.x, _chest.y + 16, 16, 4);
+
+            add(_chestPad['left']);
+            add(_chestPad['top']);
+            add(_chestPad['bottom']);
 
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = GameTracker.heading;
             add(_player);
+            
+            _passiveMessage = new FlxText(0,186,256, "");
+            _passiveMessage.alignment = "center";
+            _passiveMessage.setFormat("NES");
+            add(_passiveMessage);
+
+            _activeMessage = new FlxText(0,64,256, "");
+            _activeMessage.alignment = "center";
+            _activeMessage.setFormat("NES");
+            add(_activeMessage);
 
             _key = new KeySprite(120, 132, _player);
             add(_key);
-            
-            _chest = new ChestSprite();
-            add(_chest);
         }
 
         override public function update():void
         {
+            FlxG.collide(_player, _chest);
+
+            if(!_messageActive) {
+                if(!checkChest(FlxObject.RIGHT, 'left') &&
+                    !checkChest(FlxObject.DOWN, 'top') &&
+                    !checkChest(FlxObject.UP, 'bottom')) {
+                        _passiveMessage.text = "";
+                }
+            } else {
+                _passiveMessage.text = "PUSH X TO CONTINUE";
+                if(FlxG.keys.justPressed('X')) {
+                    _messageActive = false;
+                    _activeMessage.text = "";
+                }
+            }
+
             //Dad, are you space?
             if(FlxG.keys.SPACE)
                 FlxG.switchState(new SlideUpState());
 
             super.update();
+        }
+
+        public function checkChest(heading:uint, side:String):Boolean {
+            if(_player.heading == heading && FlxG.overlap(_player, _chestPad[side])) {
+                _passiveMessage.text = "PUSH X TO USE CHEST";
+                if(FlxG.keys.justPressed('X')) {
+                    _activeMessage.text = "THIS CHEST IS LOCKED!\n" +
+                        "YOU NEED A KEY TO OPEN IT.";
+                    _messageActive = true;
+                }
+                return true;
+            } else {
+                return false;
+            }
         }
 	}
 }

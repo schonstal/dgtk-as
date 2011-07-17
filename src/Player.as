@@ -42,10 +42,10 @@ package
 
             _walkSounds = [Walk1, Walk2];
 
-            width = 8;
+            width = 16;
             height = 16;
 
-            offset.x = 4;
+            offset.x = 0;
             offset.y = 0;
 
             heading = RIGHT;
