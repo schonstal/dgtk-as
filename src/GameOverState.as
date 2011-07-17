@@ -2,10 +2,9 @@ package
 {
 	import org.flixel.*;
 
-	public class PlayState extends FlxState
+	public class GameOverState extends FlxState
 	{
         private var _player:Player;
-        private var _key:KeySprite;
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
         
@@ -24,9 +23,6 @@ package
             _player = new Player(58, 136);
             _player.heading = FlxObject.RIGHT;
             add(_player);
-
-            _key = new KeySprite(120, 132, _player);
-            add(_key);
         }
 
         override public function update():void
