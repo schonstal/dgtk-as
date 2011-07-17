@@ -15,6 +15,7 @@ package
         private var _passiveMessage:FlxText;
 
         private var _chestPad:Array = [];
+        private var _doorPad:FlxObject;
         
         private var _doorAppeared:Boolean = false; 
         private var _messageActive:Boolean = false;
@@ -28,6 +29,9 @@ package
             _door = new DoorSprite();
             _door.play("closed");
             add(_door);
+
+            _doorPad = new FlxObject(_door.x + 16, _door.y + 8, 4, 16);
+            add(_doorPad);
             
             _chest = new ChestSprite();
             add(_chest);
@@ -72,9 +76,10 @@ package
             FlxG.collide(_player, _chest);
 
             if(!_messageActive) {
-                if(!checkChest(FlxObject.RIGHT, 'left') &&
-                    !checkChest(FlxObject.DOWN, 'top') &&
-                    !checkChest(FlxObject.UP, 'bottom')) {
+                if(!checkInteractable(FlxObject.RIGHT, 'left') &&
+                    !checkInteractable(FlxObject.DOWN, 'top') &&
+                    !checkInteractable(FlxObject.UP, 'bottom') &&
+                    !checkInteractable(FlxObject.LEFT, 'right', "DOOR")) {
                         _passiveMessage.text = "";
                 }
             } else {
@@ -95,11 +100,11 @@ package
             super.update();
         }
 
-        public function checkChest(heading:uint, side:String):Boolean {
-            if(_player.heading == heading && FlxG.overlap(_player, _chestPad[side])) {
+        public function checkInteractable(heading:uint, side:String, msg:String = "CHEST"):Boolean {
+            if(_player.heading == heading && FlxG.overlap(_player, (msg == "CHEST"?_chestPad[side]:_doorPad))) {
                 _passiveMessage.text = "PUSH X TO OPEN";
                 if(FlxG.keys.justPressed('X')) {
-                    _activeMessage.text = "THIS CHEST IS LOCKED!\n" +
+                    _activeMessage.text = "THIS "+msg+" IS LOCKED!\n" +
                         "YOU NEED A     TO OPEN IT";
                     _activeMessageKey.text = "           KEY           ";
                     _messageActive = true;
