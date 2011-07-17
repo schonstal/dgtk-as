@@ -46,11 +46,13 @@ package
             _passiveMessage = new FlxText(0,186,256, "");
             _passiveMessage.alignment = "center";
             _passiveMessage.setFormat("NES");
+            _passiveMessage.shadow = 0xff000000;
             add(_passiveMessage);
 
             _activeMessage = new FlxText(0,64,256, "");
             _activeMessage.alignment = "center";
             _activeMessage.setFormat("NES");
+            _activeMessage.shadow = 0xff000000;
             add(_activeMessage);
 
             _key = new KeySprite(120, 132, _player);
@@ -68,10 +70,12 @@ package
                         _passiveMessage.text = "";
                 }
             } else {
+                _player.mobile = false;
                 _passiveMessage.text = "PUSH X TO CONTINUE";
                 if(FlxG.keys.justPressed('X')) {
                     _messageActive = false;
                     _activeMessage.text = "";
+                    _player.mobile = true;
                 }
             }
 
