@@ -11,6 +11,7 @@ package
         private var _chest:ChestSprite;
 
         private var _activeMessage:FlxText;
+        private var _activeMessageKey:FlxText;
         private var _passiveMessage:FlxText;
 
         private var _chestPad:Array = [];
@@ -43,17 +44,24 @@ package
             _player.heading = GameTracker.heading;
             add(_player);
             
-            _passiveMessage = new FlxText(0,186,256, "");
+            _passiveMessage = new FlxText(0,205,256, "");
             _passiveMessage.alignment = "center";
             _passiveMessage.setFormat("NES");
             _passiveMessage.shadow = 0xff000000;
             add(_passiveMessage);
 
-            _activeMessage = new FlxText(0,64,256, "");
+            _activeMessage = new FlxText(0,90,256, "");
             _activeMessage.alignment = "center";
             _activeMessage.setFormat("NES");
             _activeMessage.shadow = 0xff000000;
             add(_activeMessage);
+            
+            _activeMessageKey = new FlxText(0,_activeMessage.y+8,256, "");
+            _activeMessageKey.alignment = "center";
+            _activeMessageKey.setFormat("NES");
+            _activeMessageKey.color = 0xfffeff33;
+            _activeMessageKey.shadow = 0xff000000;
+            add(_activeMessageKey);
 
             _key = new KeySprite(120, 132, _player);
             add(_key);
@@ -75,6 +83,7 @@ package
                 if(FlxG.keys.justPressed('X')) {
                     _messageActive = false;
                     _activeMessage.text = "";
+                    _activeMessageKey.text = "";
                     _player.mobile = true;
                 }
             }
@@ -88,10 +97,11 @@ package
 
         public function checkChest(heading:uint, side:String):Boolean {
             if(_player.heading == heading && FlxG.overlap(_player, _chestPad[side])) {
-                _passiveMessage.text = "PUSH X TO USE CHEST";
+                _passiveMessage.text = "PUSH X TO OPEN";
                 if(FlxG.keys.justPressed('X')) {
                     _activeMessage.text = "THIS CHEST IS LOCKED!\n" +
-                        "YOU NEED A KEY TO OPEN IT.";
+                        "YOU NEED A     TO OPEN IT";
+                    _activeMessageKey.text = "           KEY           ";
                     _messageActive = true;
                 }
                 return true;
