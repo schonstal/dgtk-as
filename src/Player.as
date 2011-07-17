@@ -35,8 +35,8 @@ package
             
             addAnimation("stop_left", [7]);
             addAnimation("stop_right", [0]);
-            addAnimation("stop_down", [4]);
-            addAnimation("stop_up", [2]);
+            addAnimation("stop_down", [10]);
+            addAnimation("stop_up", [9]);
             
             addAnimation("got_key", [6]);
 
