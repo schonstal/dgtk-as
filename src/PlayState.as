@@ -9,6 +9,9 @@ package
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
         private var _chest:ChestSprite;
+        private var _timer:FlxText;
+        private var _lives:FlxText;
+        private var _keys:FlxText;
 
         private var _activeMessage:FlxText;
         private var _activeMessageKey:FlxText;
@@ -82,6 +85,21 @@ package
             _activeMessageKey.shadow = 0xff000000;
             add(_activeMessageKey);
 
+            _timer = new FlxText(222, 38, 20, "30");
+            _timer.alignment = "right";
+            _timer.setFormat("NES");
+            add(_timer); 
+            
+            _lives = new FlxText(110, 38, 20, "1");
+            _lives.alignment = "left";
+            _lives.setFormat("NES");
+            add(_lives); 
+
+            _keys = new FlxText(110, 22, 20, "0");
+            _keys.alignment = "left";
+            _keys.setFormat("NES");
+            add(_keys); 
+
             //Add key
             _key = new KeySprite(120, 132, _player);
             add(_key);
@@ -89,6 +107,13 @@ package
 
         override public function update():void
         {
+            GameTracker.timeRemaining -= FlxG.elapsed;
+            _timer.text = zeroPad(GameTracker.timeRemaining, 2);
+
+            if(GameTracker.timeRemaining <= 0) {
+                FlxG.switchState(new WinState());
+            }
+
             FlxG.collide(_player, _chest);
             FlxG.collide(_player, _walls);
 
@@ -136,6 +161,13 @@ package
             var wall:FlxObject = new FlxObject(X,Y,w,h);
             wall.immovable = true;
             _walls.add(wall);
+        }
+
+        public function zeroPad(number:int, width:int):String {
+           var ret:String = ""+number;
+           while( ret.length < width )
+               ret="0" + ret;
+           return ret;
         }
 	}
 }

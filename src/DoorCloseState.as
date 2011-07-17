@@ -26,6 +26,8 @@ package
             _player.mobile = false;
             add(_player);
 
+            GameTracker.timeRemaining = 30;
+
         }
 
         override public function update():void
