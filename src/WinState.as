@@ -28,6 +28,7 @@ package
             _t = new FlxText(0,64,256, "CONGRATULATIONS!");
             _t.alignment = "center";
             _t.setFormat("NES");
+            _t.shadow = 0xff000000;
             add(_t);
             
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
@@ -45,6 +46,6 @@ package
         override public function update():void
         {
             super.update();
-       } 
+        } 
 	}
 }
