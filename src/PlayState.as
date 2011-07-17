@@ -16,23 +16,28 @@ package
 
         private var _chestPad:Array = [];
         private var _doorPad:FlxObject;
+
+        private var _walls:FlxGroup;
         
         private var _doorAppeared:Boolean = false; 
         private var _messageActive:Boolean = false;
 
         override public function create():void
         {
+            //Add bg
             _background = new BackgroundSprite();
             _background.x = -256;
             add(_background);
 
+            //Add door
             _door = new DoorSprite();
             _door.play("closed");
             add(_door);
 
             _doorPad = new FlxObject(_door.x + 16, _door.y + 8, 4, 16);
             add(_doorPad);
-            
+
+            //add Chest            
             _chest = new ChestSprite();
             add(_chest);
 
@@ -44,10 +49,20 @@ package
             add(_chestPad['top']);
             add(_chestPad['bottom']);
 
+            //Add player
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = GameTracker.heading;
             add(_player);
+
+            //Define boundaries
+            _walls = new FlxGroup();
+            addWall(0,0,32,256);
+            addWall(224,0,32,256);
+            addWall(0,0,240,80);
+            addWall(0,200,240,40);
+            add(_walls); 
             
+            //Add messages
             _passiveMessage = new FlxText(0,205,256, "");
             _passiveMessage.alignment = "center";
             _passiveMessage.setFormat("NES");
@@ -67,6 +82,7 @@ package
             _activeMessageKey.shadow = 0xff000000;
             add(_activeMessageKey);
 
+            //Add key
             _key = new KeySprite(120, 132, _player);
             add(_key);
         }
@@ -74,6 +90,7 @@ package
         override public function update():void
         {
             FlxG.collide(_player, _chest);
+            FlxG.collide(_player, _walls);
 
             if(!_messageActive) {
                 if(!checkInteractable(FlxObject.RIGHT, 'left') &&
@@ -113,6 +130,12 @@ package
             } else {
                 return false;
             }
+        }
+
+        public function addWall(X:Number, Y:Number, w:Number, h:Number):void {
+            var wall:FlxObject = new FlxObject(X,Y,w,h);
+            wall.immovable = true;
+            _walls.add(wall);
         }
 	}
 }
