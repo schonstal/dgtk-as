@@ -11,6 +11,7 @@ package
         public var heading:uint = RIGHT;
         public var automated:Boolean = true;
         public var got_key:Boolean = false;
+        public var dance:Boolean = false;
 
         [Embed(source='../data/character.png')] private var ImgPlayer:Class;
         private var _move_speed:int = 50;
@@ -39,6 +40,7 @@ package
             addAnimation("stop_up", [9]);
             
             addAnimation("got_key", [6]);
+            addAnimation("dance", [7, 8, 4, 2], _walkFPS);
 
             _walkSounds = [Walk1, Walk2];
 
@@ -103,22 +105,26 @@ package
                 }
             } else {
                 if(!got_key) {
-                    switch(heading) {
-                        case LEFT:
-                            play("stop_left");
-                            break;
-                        case RIGHT:
-                            play("stop_right");
-                            break;
-                        case UP:
-                            play("stop_up");
-                            break;
-                        case DOWN:
-                            play("stop_down");
-                            break;
+                    if(!dance) {
+                        switch(heading) {
+                            case LEFT:
+                                play("stop_left");
+                                break;
+                            case RIGHT:
+                                play("stop_right");
+                                break;
+                            case UP:
+                                play("stop_up");
+                                break;
+                            case DOWN:
+                                play("stop_down");
+                                break;
+                        } 
+                    } else {
+                        play("dance");
                     }
                 } else {
-                  play("got_key");
+                    play("got_key");
                 }
             }
 

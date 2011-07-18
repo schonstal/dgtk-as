@@ -49,11 +49,11 @@ package
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = FlxObject.RIGHT;
             _player.y -= 2;
-            _player.got_key = true;
             _player.mobile = false;
+            _player.dance = true;
             add(_player);
 
-            _key = new KeySprite(_player.x - 4, _player.y - 16, _player);
+            _key = new KeySprite(120, 129, _player);
             _key.floating = false;
             add(_key);
             

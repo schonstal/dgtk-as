@@ -101,7 +101,7 @@ package
             add(_keys); 
 
             //Add key
-            _key = new KeySprite(120, 132, _player);
+            _key = new KeySprite(120, 129, _player);
             add(_key);
         }
 
