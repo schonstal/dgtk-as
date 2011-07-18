@@ -10,6 +10,7 @@ package
             super(slot);
             loadGraphic(ImgBinoculars, true, true, 16, 16);
             description = "THE LENS COVERS ARE LOCKED IN PLACE";
+            name = "BINOCULARS"
         }
     }
 }
