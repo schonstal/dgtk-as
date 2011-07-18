@@ -9,8 +9,8 @@ package
         public function ItemRope(slot:int) {
             super(slot);
             loadGraphic(ImgRope, true, true, 16, 16);
-            description = "IT'S LOCKED SHUT";
-            name = "LOCKET";
+            description = "IT'S LOCKED";
+            name = "ROPE";
         }
     }
 }
