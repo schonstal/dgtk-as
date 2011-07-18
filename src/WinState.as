@@ -9,12 +9,9 @@ package
         private var _door:DoorSprite;
         private var _key:KeySprite;
         private var _t:FlxText;
+        private var _chest:ChestSprite;
+        private var _rave:Rave;
         
-        private var _swipeTimer:Number = 0;
-        private var _swipeThreshold:Number = 1;
-        
-        private var _doorAppeared:Boolean = false; 
-
         override public function create():void
         {
             _background = new BackgroundSprite();
@@ -41,6 +38,12 @@ package
             _key = new KeySprite(_player.x - 4, _player.y - 16, _player);
             _key.floating = false;
             add(_key);
+            
+            _chest = new ChestSprite();
+            add(_chest);
+
+            _rave = new Rave();
+            add(_rave);
         }
 
         override public function update():void
