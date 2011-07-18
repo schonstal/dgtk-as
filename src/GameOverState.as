@@ -9,6 +9,8 @@ package
         private var _door:DoorSprite;
         private var _key:KeySprite;
         private var _t:FlxText;
+        private var _gt:FlxText;
+        private var _ps:FlxText;
         
         private var _barLeft:BlackBarSprite;
         private var _barRight:BlackBarSprite;
@@ -17,6 +19,9 @@ package
         private var _swipeThreshold:Number = 1;
         
         private var _doorAppeared:Boolean = false; 
+        
+        private var _elapsed:Number = 0;
+        private var _flashRate:Number = 1;
 
         override public function create():void
         {
@@ -28,9 +33,10 @@ package
             _door.play("closed");
             add(_door);
 
-            _t = new FlxText(0,64,256, "YOU GOT THE KEY");
+            _t = new FlxText(0,94,256, "YOU GOT THE KEY!");
             _t.alignment = "center";
             _t.setFormat("NES");
+            _t.shadow = 0xff000000;
             add(_t);
             
             _barLeft = new BlackBarSprite(-128, 48);
@@ -48,6 +54,16 @@ package
             _key = new KeySprite(_player.x - 4, _player.y - 16, _player);
             _key.floating = false;
             add(_key);
+
+            _gt = new FlxText(0,94,256, "");
+            _gt.alignment = "center";
+            _gt.setFormat("NES");
+            add(_gt);
+
+            _ps = new FlxText(0,186,256, "");
+            _ps.alignment = "center";
+            _ps.setFormat("NES");
+            add(_ps);
         }
 
         override public function update():void
@@ -57,6 +73,19 @@ package
                 _barLeft.swipe(false);  
                 _barRight.swipe(true);
             }
+
+            if(_barLeft.x >= 0) {
+                _gt.text = "GAME OVER";
+                _elapsed += FlxG.elapsed;
+                if(_elapsed >= _flashRate) {
+                    _elapsed = 0;
+                    _ps.text = (_ps.text == "" ? "PUSH X TO RESTART" : "");
+                }
+
+                if(FlxG.keys.justPressed("X"))
+                    FlxG.switchState(new MenuState());
+            }
+    
             super.update();
        } 
 	}
