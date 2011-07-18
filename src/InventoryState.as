@@ -1,6 +1,7 @@
 package
 {
 	import org.flixel.*;
+    import flash.utils.getDefinitionByName;
 
 	public class InventoryState extends FlxState
 	{
@@ -8,6 +9,7 @@ package
         private var _background:BackgroundSprite;
         private var _selectorSprite:SelectorSprite;
         private var _numItems:int = 7;
+        private var _itemList:Array = [];
 
         override public function create():void
         {
@@ -16,6 +18,15 @@ package
 
             _selectorSprite = new SelectorSprite();
             add(_selectorSprite);
+
+            var currentSlot:int = 0;
+            GameTracker.generateItems();
+            for each (var itemClass:Class in GameTracker.items) {
+                var item:InventoryItem = new itemClass(currentSlot);
+                _itemList[currentSlot] = item;
+                add(item);
+                currentSlot++;
+            }
         }
 
         override public function update():void

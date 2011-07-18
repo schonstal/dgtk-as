@@ -13,7 +13,14 @@ package
         //Persist the player heading between states
         public var _heading:uint;
 
+        //Items for this playthough in the inventory
+        public var _items:Array;
+
         private static var _instance:GameTracker = null;
+        private static var _allItems:Array = [
+            ItemBikelock,
+            ItemBinoculars
+        ]
 
 		public function GameTracker() {
         }
@@ -51,5 +58,25 @@ package
         public static function set heading(value:uint):void {
             instance._heading = value;
         }
+
+        public static function get items():Array {
+            return instance._items;
+        }
+
+        public static function set items(value:Array):void {
+            instance._items = value;
+        }
+
+        public static function generateItems():void {
+            var newItems:Array = [];
+            for each (var it:Class in _allItems) { 
+                if(Math.random() > 0.3) {
+                    newItems.push(it);
+                }
+            }
+            items = newItems.sort(function(a:Class, b:Class):int {
+                return Math.round(Math.random()*2)-1;
+            });
+        } 
     }
 }
