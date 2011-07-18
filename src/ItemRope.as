@@ -4,7 +4,7 @@ package
 
     public class ItemRope extends InventoryItem
     {
-        [Embed(source = "../data/item_locket.png")] private var ImgRope:Class;
+        [Embed(source = "../data/item_rope.png")] private var ImgRope:Class;
 
         public function ItemRope(slot:int) {
             super(slot);
