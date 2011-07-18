@@ -11,6 +11,7 @@ package
         private var _t:FlxText;
         private var _chest:ChestSprite;
         private var _rave:Rave;
+        private var _darken:Darken;
         private var _timer:FlxText;
         private var _lives:FlxText;
         private var _keys:FlxText;
@@ -40,7 +41,7 @@ package
             _door.play("closed");
             add(_door);
 
-            _t = new FlxText(0,64,256, "CONGRATULATIONS!");
+            _t = new FlxText(0,94,256, "CONGRATULATIONS!");
             _t.alignment = "center";
             _t.setFormat("NES");
             _t.shadow = 0xff000000;
@@ -60,8 +61,12 @@ package
             _chest = new ChestSprite();
             add(_chest);
 
+            _darken = new Darken();
+            add(_darken);
+
             _rave = new Rave();
             add(_rave);
+
         }
 
         override public function update():void

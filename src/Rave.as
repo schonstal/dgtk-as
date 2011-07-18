@@ -5,13 +5,18 @@ package
     public class Rave extends FlxSprite
     {
         private var _timer:Number = 0;
-        private var _threshold:Number = 0.3;
+        private var _threshold:Number = 0.15;
         private var _colorIndex:Number = 0;
 
         private var _colors:Array = [
-            0xffff0000,
-            0xff00ff00,
-            0xff0000ff
+            0xffffff00,
+            0xff222222,
+            0xff00ffff,
+            0xff222222,
+            0xffff00ff,
+            0xff222222,
+            0xffff2200,
+            0xff222222
         ];
 
         private var _mask:uint = _colors[0];
@@ -19,7 +24,7 @@ package
         public function Rave() {
             super(0,56);
             makeGraphic(256, 184, 0xff000000);
-            blend = "add";
+            blend = "multiply";
         }
         
         override public function update():void {
