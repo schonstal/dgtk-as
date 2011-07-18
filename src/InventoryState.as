@@ -20,7 +20,6 @@ package
             add(_selectorSprite);
 
             var currentSlot:int = 0;
-            GameTracker.generateItems();
             for each (var itemClass:Class in GameTracker.items) {
                 var item:InventoryItem = new itemClass(currentSlot);
                 _itemList[currentSlot] = item;

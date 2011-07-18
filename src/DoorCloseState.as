@@ -27,7 +27,7 @@ package
             add(_player);
 
             GameTracker.timeRemaining = 30;
-
+            GameTracker.generateItems();
         }
 
         override public function update():void
