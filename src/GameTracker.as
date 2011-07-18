@@ -19,7 +19,16 @@ package
         private static var _instance:GameTracker = null;
         private static var _allItems:Array = [
             ItemBikelock,
-            ItemBinoculars
+            ItemBinoculars,
+            ItemGoldpouch,
+            ItemJournal,
+            ItemKeyrings,
+            ItemLockbox,
+            ItemLocket,
+            ItemLockOfHair,
+            ItemLockPicks,
+            ItemPadLock,
+            ItemRope
         ]
 
 		public function GameTracker() {
