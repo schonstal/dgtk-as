@@ -25,6 +25,9 @@ package
             _player.heading = FlxObject.RIGHT;
             _player.mobile = false;
             add(_player);
+
+            GameTracker.timeRemaining = 30;
+            GameTracker.generateItems();
         }
 
         override public function update():void

@@ -42,6 +42,7 @@ package
             add(_t);
 
             FlxG.flash(0xffffffff, 0.25);
+            FlxG.shake(0.01, 0.4);
         }
 
         override public function update():void

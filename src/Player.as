@@ -11,6 +11,7 @@ package
         public var heading:uint = RIGHT;
         public var automated:Boolean = true;
         public var got_key:Boolean = false;
+        public var dance:Boolean = false;
 
         [Embed(source='../data/character.png')] private var ImgPlayer:Class;
         private var _move_speed:int = 50;
@@ -35,17 +36,19 @@ package
             
             addAnimation("stop_left", [7]);
             addAnimation("stop_right", [0]);
-            addAnimation("stop_down", [4]);
-            addAnimation("stop_up", [2]);
+            addAnimation("stop_down", [10]);
+            addAnimation("stop_up", [9]);
             
             addAnimation("got_key", [6]);
+            addAnimation("dance", [7, 8, 4, 2], _walkFPS);
 
             _walkSounds = [Walk1, Walk2];
 
-            width = 8;
-            height = 8;
-            offset.x = 4;
-            offset.y = 4;
+            width = 16;
+            height = 16;
+
+            offset.x = 0;
+            offset.y = 0;
 
             heading = RIGHT;
 
@@ -102,24 +105,32 @@ package
                 }
             } else {
                 if(!got_key) {
-                    switch(heading) {
-                        case LEFT:
-                            play("stop_left");
-                            break;
-                        case RIGHT:
-                            play("stop_right");
-                            break;
-                        case UP:
-                            play("stop_up");
-                            break;
-                        case DOWN:
-                            play("stop_down");
-                            break;
+                    if(!dance) {
+                        switch(heading) {
+                            case LEFT:
+                                play("stop_left");
+                                break;
+                            case RIGHT:
+                                play("stop_right");
+                                break;
+                            case UP:
+                                play("stop_up");
+                                break;
+                            case DOWN:
+                                play("stop_down");
+                                break;
+                        } 
+                    } else {
+                        play("dance");
                     }
                 } else {
-                  play("got_key");
+                    play("got_key");
                 }
             }
+
+            GameTracker.playerPos.x = x;
+            GameTracker.playerPos.y = y;
+            GameTracker.heading = heading;
 
             super.update();
         }
