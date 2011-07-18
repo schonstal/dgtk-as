@@ -83,9 +83,15 @@ package
                     newItems.push(it);
                 }
             }
-            items = newItems.sort(function(a:Class, b:Class):int {
+            newItems = newItems.sort(function(a:Class, b:Class):int {
                 return Math.round(Math.random()*2)-1;
             });
+
+            if(newItems.length > 8) {
+                newItems.splice(8, 100);
+            }
+
+            items = newItems;
         } 
     }
 }
