@@ -102,6 +102,8 @@ package
 
             //Add key
             _key = new KeySprite(120, 129, _player);
+            var keyShadow:KeyShadowSprite = new KeyShadowSprite(_key.x-4, _key.y-2);
+            add(keyShadow);
             add(_key);
         }
 

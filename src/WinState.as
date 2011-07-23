@@ -55,7 +55,8 @@ package
             add(_player);
 
             _key = new KeySprite(120, 129, _player);
-            _key.floating = false;
+            var keyShadow:KeyShadowSprite = new KeyShadowSprite(_key.x-4, _key.y-2);
+            add(keyShadow);
             add(_key);
             
             _chest = new ChestSprite();
