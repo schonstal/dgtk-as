@@ -4,6 +4,8 @@ package
 
     public class LogoState extends FlxState
     {
+        [Embed(source="../data/Sounds_package.swf", symbol="pickup_key.wav")] public var Ding:Class;
+
         private var _elapsed:Number = 0;
         private var _rate:Number = 0.5;//2;
 
@@ -14,6 +16,7 @@ package
           add(logoSprite);
 
           //Should play a sound here ("ba-ding!")
+          FlxG.play(Ding);
         }
 
         override public function update():void

@@ -4,6 +4,9 @@ package
 
 	public class GameOverState extends FlxState
 	{
+        [Embed(source="../data/Sounds_package.swf", symbol="pickup_key.wav")] public var Ding:Class;
+        [Embed(source="../data/Sounds_package.swf", symbol="game_over.wav")] public var GameOverSound:Class;
+
         private var _player:Player;
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
@@ -11,7 +14,7 @@ package
         private var _t:FlxText;
         private var _gt:FlxText;
         private var _ps:FlxText;
-        
+
         private var _barLeft:BlackBarSprite;
         private var _barRight:BlackBarSprite;
         
@@ -19,12 +22,15 @@ package
         private var _swipeThreshold:Number = 1;
         
         private var _doorAppeared:Boolean = false; 
+        private var _gameOverPlayed:Boolean = false;
         
         private var _elapsed:Number = 0;
         private var _flashRate:Number = 1;
 
         override public function create():void
         {
+            FlxG.play(Ding);
+
             _background = new BackgroundSprite();
             _background.x = -256;
             add(_background);
@@ -75,6 +81,10 @@ package
             }
 
             if(_barLeft.x >= 0) {
+                if(!_gameOverPlayed) {
+                    FlxG.play(GameOverSound);
+                    _gameOverPlayed = true;
+                }
                 _gt.text = "GAME OVER";
                 _elapsed += FlxG.elapsed;
                 if(_elapsed >= _flashRate) {
