@@ -27,6 +27,8 @@ package
         private var _elapsed:Number = 0;
         private var _flashRate:Number = 1;
 
+        private var _gameOverSoundInstance:FlxSound;
+
         override public function create():void
         {
             FlxG.play(Ding);
@@ -39,7 +41,7 @@ package
             _door.play("closed");
             add(_door);
 
-            _barLeft = new BlackBarSprite(-128, 48);
+            _barLeft = new BlackBarSprite(-138, 48);
             add(_barLeft);
             _barRight = new BlackBarSprite(256, 48);
             add(_barRight);
@@ -75,14 +77,14 @@ package
                 _barRight.swipe(true);
             }
 
-            if(_barLeft.x >= 0) {
+            if(_barLeft.x >= -10) {
                 if(!_gameOverPlayed) {
-                    FlxG.play(GameOverSound);
+                    _gameOverSoundInstance = FlxG.play(GameOverSound);
                     _gameOverPlayed = true;
                 }
                 _t.text = "GAME OVER";
                 _elapsed += FlxG.elapsed;
-                if(_elapsed >= _flashRate) {
+                if(_elapsed >= _flashRate && !_gameOverSoundInstance.active) {
                     _elapsed = 0;
                     _ps.text = (_ps.text == "" ? "PUSH X TO RESTART" : "");
                 }

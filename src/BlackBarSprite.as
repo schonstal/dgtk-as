@@ -11,7 +11,7 @@ package
 
         public function BlackBarSprite(X:Number, Y:Number) {
             super(X, Y);
-            loadGraphic(ImgBar, true, true, 128, 192);
+            loadGraphic(ImgBar, true, true, 138, 192);
         }
         
         override public function update():void {
