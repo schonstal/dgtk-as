@@ -53,7 +53,7 @@ package
             heading = RIGHT;
 
             addAnimationCallback(function(id:String, frameNumber:uint, frameIndex:uint):void {
-                if(frameIndex != 6 && (FlxG.keys.UP || FlxG.keys.DOWN || FlxG.keys.RIGHT || FlxG.keys.LEFT)) {
+                if(frameIndex != 6 && (FlxG.keys.UP || FlxG.keys.DOWN || FlxG.keys.RIGHT || FlxG.keys.LEFT || automated) && (velocity.x != 0 || velocity.y != 0)) {
                     _walkFrame = ++_walkFrame % 2;
                     FlxG.play(_walkSounds[_walkFrame]);
                 }
