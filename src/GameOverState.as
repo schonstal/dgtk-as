@@ -39,16 +39,16 @@ package
             _door.play("closed");
             add(_door);
 
-            _t = new FlxText(0,94,256, "YOU GOT THE KEY!");
-            _t.alignment = "center";
-            _t.setFormat("NES");
-            _t.shadow = 0xff000000;
-            add(_t);
-            
             _barLeft = new BlackBarSprite(-128, 48);
             add(_barLeft);
             _barRight = new BlackBarSprite(256, 48);
             add(_barRight);
+
+            _t = new FlxText(0,94,256, "YOU GOT THE KEY!");
+            _t.alignment = "center";
+            _t.setFormat("NES");
+            _t.shadow = 0xff000000;
+            add(_t);            
 
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = FlxObject.RIGHT;
@@ -60,11 +60,6 @@ package
             _key = new KeySprite(_player.x - 4, _player.y - 16, _player);
             _key.floating = false;
             add(_key);
-
-            _gt = new FlxText(0,94,256, "");
-            _gt.alignment = "center";
-            _gt.setFormat("NES");
-            add(_gt);
 
             _ps = new FlxText(0,186,256, "");
             _ps.alignment = "center";
@@ -85,7 +80,7 @@ package
                     FlxG.play(GameOverSound);
                     _gameOverPlayed = true;
                 }
-                _gt.text = "GAME OVER";
+                _t.text = "GAME OVER";
                 _elapsed += FlxG.elapsed;
                 if(_elapsed >= _flashRate) {
                     _elapsed = 0;
