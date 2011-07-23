@@ -4,6 +4,9 @@ package
 
     public class MenuState extends FlxState
     {
+        [Embed(source="../data/Sounds_package.swf", symbol="menu.wav")] public var MenuSound:Class;
+        [Embed(source="../data/Sounds_package.swf", symbol="start.wav")] public var StartSound:Class;
+
         private var _elapsed:Number = 0;
         private var _startFlashRate:Number = 1;
         private var _startText:String = "PUSH SPACE BUTTON";
@@ -23,8 +26,12 @@ package
         private var _flashing:Boolean = false;
         private var _spacePressed:Boolean = false;
 
+        private var _startSoundInstance:FlxSound;
+
         override public function create():void
         {
+            FlxG.play(MenuSound);
+
             _background = new BackgroundSprite();
             add(_background);
 
@@ -57,6 +64,7 @@ package
                 _t.flicker(_flickerThreshold);
                 remove(_title);
                 if(!_flashing) {
+                    _startSoundInstance = FlxG.play(StartSound);
                     var flashingTitle:FlashingTitleSprite = new FlashingTitleSprite();
                     add(flashingTitle);
                     _spacePressed = true;
@@ -65,8 +73,7 @@ package
             }
 
             if(_spacePressed) {
-                _flickerTimer += FlxG.elapsed;
-                if(_flickerTimer >= _flickerThreshold)
+                if(!_startSoundInstance.active)
                     FlxG.switchState(new WalkRightState());
             }
             super.update();
