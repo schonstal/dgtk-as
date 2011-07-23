@@ -4,6 +4,8 @@ package
 
 	public class PlayState extends FlxState
 	{
+        [Embed(source="../data/Sounds_package.swf", symbol="chest_locked.wav")] public var LockedSound:Class;
+
         private var _player:Player;
         private var _key:KeySprite;
         private var _background:BackgroundSprite;
@@ -148,6 +150,7 @@ package
             if(_player.heading == heading && FlxG.overlap(_player, (msg == "CHEST"?_chestPad[side]:_doorPad))) {
                 _passiveMessage.text = "PUSH X TO OPEN";
                 if(FlxG.keys.justPressed('X')) {
+                    FlxG.play(LockedSound);
                     _activeMessage.text = "THIS "+msg+" IS LOCKED!\n" +
                         "YOU NEED A     TO OPEN IT";
                     _activeMessageKey.text = "           KEY           ";
