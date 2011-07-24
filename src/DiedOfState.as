@@ -26,7 +26,7 @@ package
             var grave:GraveSprite = new GraveSprite(112, 104);
             add(grave);
 
-            _continue = new FlxText(0,186,256, "");
+            _continue = new FlxText(0,170,256, "");
             _continue.alignment = "center";
             _continue.setFormat("NES");
             add(_continue);
@@ -36,8 +36,7 @@ package
         {
             _continueTimer += FlxG.elapsed;
             if(_continueTimer > _continueThreshold) {
-                _continueTimer = 0;
-                _continue.text = _continue.text == "" ? _continueText : "";
+                _continue.text = _continueText;
             }
             if(FlxG.keys.justPressed("X") || FlxG.keys.justPressed("SPACE")){
                 FlxG.switchState(new MenuState());

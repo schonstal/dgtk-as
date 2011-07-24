@@ -26,7 +26,7 @@ package
             _player.mobile = false;
             add(_player);
 
-            GameTracker.timeRemaining = 30;
+            GameTracker.timeRemaining = 1;
             GameTracker.generateItems();
         }
 
