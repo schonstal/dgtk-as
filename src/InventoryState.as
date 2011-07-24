@@ -75,7 +75,7 @@ package
             _itemName.setFormat("NES");
             add(_itemName); 
 
-            doSelect(0);
+            doSelect(0, false);
         }
 
         override public function update():void
@@ -135,7 +135,7 @@ package
             super.update();
         }
 
-        public function doSelect(newPosition:Number):void {
+        public function doSelect(newPosition:Number, playSound:Boolean = true):void {
             resetDescription();
 
             if(_itemList[selector] != null)
@@ -148,7 +148,9 @@ package
             } else {
                 _itemName.text = '';
             }
-            FlxG.play(SelectSound);
+            
+            if(playSound)
+                FlxG.play(SelectSound);
         }
 
         public function resetDescription():void {
