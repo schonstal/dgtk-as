@@ -122,7 +122,7 @@ package
 
         override public function update():void
         {
-            if((_player.velocity.x != 0 || _player.velocity.y != 0) && _freshState)
+            if((_player.velocity.x != 0 || _player.velocity.y != 0) || !_freshState)
                 _arrowsPressed = true;
 
             _walkTimer += FlxG.elapsed;
