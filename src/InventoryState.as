@@ -11,10 +11,12 @@ package
         private var _selectorSprite:SelectorSprite;
         private var _numItems:int = 7;
         private var _itemList:Array = [];
+        private var _itemLogoList:Array = [];
 
         private var _timer:FlxText;
         private var _lives:FlxText;
         private var _keys:FlxText;
+        private var _itemName:FlxText;
 
         override public function create():void
         {
@@ -44,8 +46,21 @@ package
                 var item:InventoryItem = new itemClass(currentSlot);
                 _itemList[currentSlot] = item;
                 add(item);
+                var itemLogo:InventoryItem = new itemClass(1);
+                itemLogo.x = 192;
+                itemLogo.y = 44;
+                itemLogo.alpha = 0;
+                _itemLogoList[currentSlot] = itemLogo;
+                add(itemLogo);
                 currentSlot++;
             }
+
+            _itemName = new FlxText(154, 63, 88, '');
+            _itemName.alignment = "center";
+            _itemName.setFormat("NES");
+            add(_itemName); 
+
+            doSelect(0);
         }
 
         override public function update():void
@@ -77,7 +92,15 @@ package
         }
 
         public function doSelect(newPosition:Number):void {
+            if(_itemList[selector] != null)
+                _itemLogoList[selector].alpha = 0;
             selector = newPosition;
+            if(_itemList[selector] != null) {
+                _itemLogoList[selector].alpha = 1;
+                _itemName.text = _itemList[selector].name;
+            } else {
+                _itemName.text = '';
+            }
             FlxG.play(SelectSound);
         }
 	}
