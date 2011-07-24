@@ -14,11 +14,12 @@ package
         private var _itemList:Array = [];
         private var _itemLogoList:Array = [];
 
-        private var _timer:FlxText;
         private var _lives:FlxText;
         private var _keys:FlxText;
         private var _itemName:FlxText;
         private var _description:FlxText;
+
+        private var _timer:TimerText;
 
         //This wouldn't be necessary if actionscript just supported continuations...
         private var _index:uint = 0;
@@ -34,9 +35,7 @@ package
             _background = new BackgroundSprite(-256, 0);
             add(_background);
 
-            _timer = new FlxText(222, 38+184, 20, PlayState.zeroPad(GameTracker.timeRemaining, 2));
-            _timer.alignment = "right";
-            _timer.setFormat("NES");
+            _timer = new TimerText(222, 38+184);
             add(_timer); 
             
             _lives = new FlxText(110, 38+184, 20, "1");
@@ -76,7 +75,7 @@ package
             _itemName.setFormat("NES");
             add(_itemName); 
 
-            doSelect(0);
+            doSelect(0, false);
         }
 
         override public function update():void
@@ -136,7 +135,7 @@ package
             super.update();
         }
 
-        public function doSelect(newPosition:Number):void {
+        public function doSelect(newPosition:Number, playSound:Boolean = true):void {
             resetDescription();
 
             if(_itemList[selector] != null)
@@ -149,7 +148,9 @@ package
             } else {
                 _itemName.text = '';
             }
-            FlxG.play(SelectSound);
+            
+            if(playSound)
+                FlxG.play(SelectSound);
         }
 
         public function resetDescription():void {
