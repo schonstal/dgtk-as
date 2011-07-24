@@ -11,10 +11,29 @@ package
         private var _numItems:int = 7;
         private var _itemList:Array = [];
 
+        private var _timer:FlxText;
+        private var _lives:FlxText;
+        private var _keys:FlxText;
+
         override public function create():void
         {
             _background = new BackgroundSprite(-256, 0);
             add(_background);
+
+            _timer = new FlxText(222, 38+184, 20, PlayState.zeroPad(GameTracker.timeRemaining, 2));
+            _timer.alignment = "right";
+            _timer.setFormat("NES");
+            add(_timer); 
+            
+            _lives = new FlxText(110, 38+184, 20, "1");
+            _lives.alignment = "left";
+            _lives.setFormat("NES");
+            add(_lives); 
+
+            _keys = new FlxText(110, 22+184, 20, "0");
+            _keys.alignment = "left";
+            _keys.setFormat("NES");
+            add(_keys); 
 
             _selectorSprite = new SelectorSprite();
             add(_selectorSprite);
