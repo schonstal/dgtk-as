@@ -87,7 +87,7 @@ package
             _continueTimer += FlxG.elapsed;
             if(_continueTimer > _continueThreshold) {
                 _continueTimer = 0;
-                _continue.text = _continue.text == "" ? _continueText : "";
+                _continue.text = _continueText;
             }
             if(FlxG.keys.justPressed("X") || FlxG.keys.justPressed("SPACE")){
                 FlxG.switchState(new DiedOfState());
