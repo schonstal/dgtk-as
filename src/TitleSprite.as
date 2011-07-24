@@ -9,13 +9,13 @@ package
             super(0, 0);
             loadGraphic(ImgTitle, true, true, 256, 128);
             var animationList:Array = [];
-            for(var i:int = 0; i < 45; i++) {
+            for(var i:int = 0; i < 30; i++) {
                 animationList.push(0);
             }
-            for(var j:int = 1; j <= 12; j++) {
+            for(var j:int = 1; j <= 10; j++) {
                 animationList.push(j);
             }
-            addAnimation("glow", animationList, 15);
+            addAnimation("glow", animationList, 10);
             addAnimation("flash", [0, 14], 15);
         }
         
