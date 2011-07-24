@@ -26,9 +26,17 @@ package
         
         private var _doorAppeared:Boolean = false; 
         private var _messageActive:Boolean = false;
+        private var _arrowsPressed:Boolean = false;
+        private var _freshState:Boolean = true;
+
+        private var _walkTimer:Number = 0;
+        private var _walkThreshold:Number = 5;
 
         override public function create():void
         {
+            if(GameTracker.timeRemaining < 30)
+                _freshState = false;
+
             //Add bg
             _background = new BackgroundSprite();
             _background.x = -256;
@@ -111,6 +119,13 @@ package
 
         override public function update():void
         {
+            if((_player.velocity.x != 0 || _player.velocity.y != 0) && _freshState)
+                _arrowsPressed = true;
+
+            _walkTimer += FlxG.elapsed;
+            if(_walkTimer >= _walkThreshold && !_arrowsPressed)
+                _passiveMessage.text = "USE ARROWS TO MOVE";
+
             GameTracker.timeRemaining -= FlxG.elapsed;
             _timer.text = zeroPad(GameTracker.timeRemaining, 2);
 
@@ -125,10 +140,11 @@ package
                 if(!checkInteractable(FlxObject.RIGHT, 'left') &&
                     !checkInteractable(FlxObject.DOWN, 'top') &&
                     !checkInteractable(FlxObject.UP, 'bottom') &&
-                    !checkInteractable(FlxObject.LEFT, 'right', "DOOR")) {
+                    !checkInteractable(FlxObject.LEFT, 'right', "DOOR")
+                    && _arrowsPressed) {
                         _passiveMessage.text = "";
                 }
-            } else {
+            } else if(_arrowsPressed) {
                 _player.mobile = false;
                 _passiveMessage.text = "PUSH X TO CONTINUE";
                 if(FlxG.keys.justPressed('X')) {
