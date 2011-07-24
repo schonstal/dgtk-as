@@ -33,7 +33,7 @@ package
         private var _walkThreshold:Number = 5;
 
         private var _continueTimer:Number = 0;
-        private var _continueThreshold:Number = 3;
+        private var _continueThreshold:Number = 2;
 
         override public function create():void
         {
