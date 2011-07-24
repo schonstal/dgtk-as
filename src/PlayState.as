@@ -87,7 +87,7 @@ package
             _activeMessageKey.shadow = 0xff000000;
             add(_activeMessageKey);
 
-            _timer = new FlxText(222, 38, 20, "30");
+            _timer = new FlxText(222, 38, 20, zeroPad(GameTracker.timeRemaining, 2));
             _timer.alignment = "right";
             _timer.setFormat("NES");
             add(_timer); 
@@ -168,7 +168,7 @@ package
             _walls.add(wall);
         }
 
-        public function zeroPad(number:int, width:int):String {
+        public static function zeroPad(number:int, width:int):String {
            var ret:String = ""+number;
            while( ret.length < width )
                ret="0" + ret;

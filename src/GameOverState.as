@@ -15,6 +15,10 @@ package
         private var _gt:FlxText;
         private var _ps:FlxText;
 
+        private var _timer:FlxText;
+        private var _lives:FlxText;
+        private var _keys:FlxText;
+
         private var _barLeft:BlackBarSprite;
         private var _barRight:BlackBarSprite;
         
@@ -41,6 +45,9 @@ package
             _door.play("closed");
             add(_door);
 
+            var chest:ChestSprite = new ChestSprite();
+            add(chest);
+
             _barLeft = new BlackBarSprite(-138, 48);
             add(_barLeft);
             _barRight = new BlackBarSprite(256, 48);
@@ -51,6 +58,21 @@ package
             _t.setFormat("NES");
             _t.shadow = 0xff000000;
             add(_t);            
+
+            _timer = new FlxText(222, 38, 20, PlayState.zeroPad(GameTracker.timeRemaining, 2));
+            _timer.alignment = "right";
+            _timer.setFormat("NES");
+            add(_timer); 
+            
+            _lives = new FlxText(110, 38, 20, "1");
+            _lives.alignment = "left";
+            _lives.setFormat("NES");
+            add(_lives); 
+
+            _keys = new FlxText(110, 22, 20, "1");
+            _keys.alignment = "left";
+            _keys.setFormat("NES");
+            add(_keys); 
 
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = FlxObject.RIGHT;
@@ -86,7 +108,7 @@ package
                 _elapsed += FlxG.elapsed;
                 if(_elapsed >= _flashRate && !_gameOverSoundInstance.active) {
                     _elapsed = 0;
-                    _ps.text = (_ps.text == "" ? "PUSH X TO RESTART" : "");
+                    _ps.text = (_ps.text == "" ? "PUSH X TO RETRY" : "");
                 }
 
                 if(FlxG.keys.justPressed("X"))
