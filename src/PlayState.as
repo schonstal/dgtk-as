@@ -145,7 +145,10 @@ package
                     !checkInteractable(FlxObject.UP, 'bottom') &&
                     !checkInteractable(FlxObject.LEFT, 'right', "DOOR")
                     && _arrowsPressed) {
-                        _passiveMessage.text = "";
+                        if(GameTracker.timeRemaining < 10 && _freshState)
+                            _passiveMessage.text = "PUSH SPACE TO USE INVENTORY";
+                        else
+                            _passiveMessage.text = "";
                         _continueTimer = 0;
                 }
             } else if(_arrowsPressed) {
