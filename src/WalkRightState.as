@@ -15,7 +15,7 @@ package
             _background = new BackgroundSprite();
             add(_background);
 
-            _player = new Player(128, 136);
+            _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y+2);
             _player.automated = true;
             _player.heading = FlxObject.RIGHT;
             _player.velocity.x = _player.move_speed;

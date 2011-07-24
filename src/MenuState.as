@@ -35,7 +35,7 @@ package
             _background = new BackgroundSprite();
             add(_background);
 
-            _player = new Player(128, 134);
+            _player = new Player(116, 134);
             _player.mobile = false;
             _player.got_key = true;
             add(_player);

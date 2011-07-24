@@ -27,7 +27,7 @@ package
 
         override public function update():void
         {
-            if(_player.x >= 128) {
+            if(_player.x >= 116) {
                 _player.velocity.x = 0;
                 _startTimer += FlxG.elapsed;
                 if(_startTimer > _startThreshold)
