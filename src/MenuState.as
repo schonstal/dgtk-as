@@ -12,7 +12,7 @@ package
         private var _startText:String = "PUSH SPACE BUTTON";
         private var _t:FlxText;
 
-        private var _startTimer:Number = 0;
+        private var _startTimer:Number = -1;
         private var _startThreshold:Number = 1;
 
         private var _flickerTimer:Number = 0;
@@ -35,7 +35,7 @@ package
             _background = new BackgroundSprite();
             add(_background);
 
-            _player = new Player(128, 136);
+            _player = new Player(128, 134);
             _player.mobile = false;
             _player.got_key = true;
             add(_player);
@@ -43,7 +43,7 @@ package
             _title = new TitleSprite();
             add(_title);
 
-            _t = new FlxText(0,186,256, _startText);
+            _t = new FlxText(0,186,256, "");
             _t.alignment = "center";
             _t.setFormat("NES");
             add(_t);
