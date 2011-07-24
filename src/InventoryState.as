@@ -5,6 +5,7 @@ package
 
 	public class InventoryState extends FlxState
 	{
+        [Embed(source='../data/Sounds_package.swf', symbol='select.wav')] public var SelectSound:Class;
         private var selector:int = 0;
         private var _background:BackgroundSprite;
         private var _selectorSprite:SelectorSprite;
@@ -51,19 +52,19 @@ package
         {
             if(FlxG.keys.justPressed("DOWN")) {
                 if(selector + 4 <= _numItems)
-                    selector = (selector + 4);
+                    doSelect(selector + 4);
             }
             if(FlxG.keys.justPressed("UP")) {
                 if(selector - 4 >= 0)
-                    selector = selector - 4;
+                    doSelect(selector - 4);
             }
             if(FlxG.keys.justPressed("RIGHT")) {
                 if(selector < _numItems && selector != 3)
-                    selector++;
+                    doSelect(selector+1);
             }
             if(FlxG.keys.justPressed("LEFT")) {
                 if(selector > 0 && selector != 4)
-                    selector--;
+                    doSelect(selector-1);
             }
 
             _selectorSprite.slot = selector;
@@ -73,6 +74,11 @@ package
                 FlxG.switchState(new SlideDownState());
 
             super.update();
+        }
+
+        public function doSelect(newPosition:Number):void {
+            selector = newPosition;
+            FlxG.play(SelectSound);
         }
 	}
 }

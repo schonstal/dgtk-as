@@ -5,7 +5,6 @@ package
     public class KeySprite extends FlxSprite
     {
         [Embed(source='../data/key.png')] private var ImgKey:Class;
-        [Embed(source="../data/Sounds_package.swf", symbol="pickup_key.wav")] public var Ding:Class;
 
         public var floating:Boolean = true;
 
@@ -39,7 +38,6 @@ package
             }
 
             if(overlaps(_player)) {
-                FlxG.play(Ding);
                 FlxG.switchState(new GameOverState());
             }
         }
