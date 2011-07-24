@@ -32,7 +32,7 @@ package
 
         override public function update():void
         {
-            if(_player.x >= 58) {
+            if(_player.x >= 48) {
                 _player.automated = false;
                 _player.velocity.x = 0;
                 
