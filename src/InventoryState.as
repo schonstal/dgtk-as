@@ -6,6 +6,7 @@ package
 	public class InventoryState extends FlxState
 	{
         [Embed(source='../data/Sounds_package.swf', symbol='select.wav')] public var SelectSound:Class;
+        [Embed(source='../data/Sounds_package.swf', symbol='typing.wav')] public var TypeSound:Class;
         private var selector:int = 0;
         private var _background:BackgroundSprite;
         private var _selectorSprite:SelectorSprite;
@@ -17,6 +18,16 @@ package
         private var _lives:FlxText;
         private var _keys:FlxText;
         private var _itemName:FlxText;
+        private var _description:FlxText;
+
+        //This wouldn't be necessary if actionscript just supported continuations...
+        private var _index:uint = 0;
+        private var _msgTimer:Number = 0;
+        private var _msgThreshold:Number = 0.032;
+        private var _typeMessage:Boolean = false;
+        private var _words:Array = [];
+        private var _wordIndex:uint = 0;
+        private var _lineNo:uint = 1;
 
         override public function create():void
         {
@@ -37,6 +48,11 @@ package
             _keys.alignment = "left";
             _keys.setFormat("NES");
             add(_keys); 
+
+            _description = new FlxText(32, 132, 192, "");
+            _description.alignment = "left";
+            _description.setFormat("NES");
+            add(_description); 
 
             _selectorSprite = new SelectorSprite();
             add(_selectorSprite);
@@ -84,24 +100,64 @@ package
 
             _selectorSprite.slot = selector;
 
+            _msgTimer += FlxG.elapsed;
+            if(_typeMessage && _msgTimer >= _msgThreshold) {
+                _description.text += _itemList[selector].description.charAt(_index);
+                if(_itemList[selector].description.charAt(_index) == ' ') {
+                    _wordIndex++;
+                    if(_words[_wordIndex].length + _description.text.length >= (24 * _lineNo)) {
+                        _description.text += "\n";
+                        _lineNo++;
+                    }
+                }
+                FlxG.play(TypeSound);
+                _index++;
+                _msgTimer = 0;
+
+                if(_index >= _itemList[selector].description.length)
+                    _typeMessage = false;
+            }
+
             //Yes, son; now we are a family again.
             if(FlxG.keys.SPACE)
                 FlxG.switchState(new SlideDownState());
+
+            if(FlxG.keys.justPressed("X")) {
+                if(_description.text == "" && _itemList[selector] != null) {
+                    _typeMessage = true;
+                } else if(_typeMessage) {
+                    resetDescription();
+                    _description.text = _itemList[selector].description;
+                } else {
+                    resetDescription();
+                }
+            }
 
             super.update();
         }
 
         public function doSelect(newPosition:Number):void {
+            resetDescription();
+
             if(_itemList[selector] != null)
                 _itemLogoList[selector].alpha = 0;
             selector = newPosition;
             if(_itemList[selector] != null) {
                 _itemLogoList[selector].alpha = 1;
                 _itemName.text = _itemList[selector].name;
+                _words = _itemList[selector].description.split(' ');
             } else {
                 _itemName.text = '';
             }
             FlxG.play(SelectSound);
+        }
+
+        public function resetDescription():void {
+            _typeMessage = false;
+            _description.text = "";
+            _index = 0;
+            _wordIndex = 0;
+            _lineNo = 1;
         }
 	}
 }
