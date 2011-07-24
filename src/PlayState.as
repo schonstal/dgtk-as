@@ -32,6 +32,9 @@ package
         private var _walkTimer:Number = 0;
         private var _walkThreshold:Number = 5;
 
+        private var _continueTimer:Number = 0;
+        private var _continueThreshold:Number = 3;
+
         override public function create():void
         {
             if(GameTracker.timeRemaining < 30)
@@ -143,15 +146,28 @@ package
                     !checkInteractable(FlxObject.LEFT, 'right', "DOOR")
                     && _arrowsPressed) {
                         _passiveMessage.text = "";
+                        _continueTimer = 0;
                 }
             } else if(_arrowsPressed) {
                 _player.mobile = false;
-                _passiveMessage.text = "PUSH X TO CONTINUE";
+
+                for each (var s:String in ["UP", "DOWN", "LEFT", "RIGHT", "SPACE"]) {
+                    if(FlxG.keys.justPressed(s))
+                        _continueTimer = _continueThreshold;
+                }
+                _continueTimer += FlxG.elapsed;
+
+                if(_continueTimer >= _continueThreshold)
+                    _passiveMessage.text = "PUSH X TO CONTINUE";
+                else
+                    _passiveMessage.text = "";
+
                 if(FlxG.keys.justPressed('X')) {
                     _messageActive = false;
                     _activeMessage.text = "";
                     _activeMessageKey.text = "";
                     _player.mobile = true;
+                    _continueTimer = 0;
                 }
             }
 
