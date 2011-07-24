@@ -11,9 +11,10 @@ package
         private var _background:BackgroundSprite;
         private var _door:DoorSprite;
         private var _chest:ChestSprite;
-        private var _timer:FlxText;
         private var _lives:FlxText;
         private var _keys:FlxText;
+
+        private var _timer:TimerText;
 
         private var _activeMessage:FlxText;
         private var _activeMessageKey:FlxText;
@@ -98,9 +99,8 @@ package
             _activeMessageKey.shadow = 0xff000000;
             add(_activeMessageKey);
 
-            _timer = new FlxText(222, 38, 20, zeroPad(GameTracker.timeRemaining, 2));
-            _timer.alignment = "right";
-            _timer.setFormat("NES");
+            _timer = new TimerText;
+            _timer.tick = true;
             add(_timer); 
             
             _lives = new FlxText(110, 38, 20, "1");
@@ -130,7 +130,6 @@ package
                 _passiveMessage.text = "USE ARROWS TO MOVE";
 
             GameTracker.timeRemaining -= FlxG.elapsed;
-            _timer.text = zeroPad(GameTracker.timeRemaining, 2);
 
             if(GameTracker.timeRemaining <= 0) {
                 FlxG.switchState(new WinState());
@@ -202,7 +201,6 @@ package
             wall.immovable = true;
             _walls.add(wall);
         }
-
         public static function zeroPad(number:int, width:int):String {
            var ret:String = ""+number;
            while( ret.length < width )

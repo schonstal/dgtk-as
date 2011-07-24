@@ -13,10 +13,11 @@ package
         private var _rave:Rave;
         private var _darken:Darken;
 
-        private var _timer:FlxText;
         private var _lives:FlxText;
         private var _keys:FlxText;
         private var _continue:FlxText;
+
+        private var _timer:FlxText;
 
         private var _continueTimer:Number = -2.5;
         private var _continueThreshold:Number = 0.5;
@@ -29,9 +30,7 @@ package
             _background.x = -256;
             add(_background);
             
-            _timer = new FlxText(222, 38, 20, "00");
-            _timer.alignment = "right";
-            _timer.setFormat("NES");
+            _timer = new TimerText();
             add(_timer); 
 
             _lives = new FlxText(110, 38, 20, "1");
