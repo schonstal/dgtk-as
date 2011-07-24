@@ -26,6 +26,8 @@ package
         
         override public function create():void
         {
+            GameTracker.api.kongregate.stats.submit("did_not_get_key", 1);
+
             _background = new BackgroundSprite();
             _background.x = -256;
             add(_background);

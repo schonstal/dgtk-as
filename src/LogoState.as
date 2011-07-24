@@ -7,7 +7,7 @@ package
         [Embed(source="../data/Sounds_package.swf", symbol="pickup_key.wav")] public var Ding:Class;
 
         private var _elapsed:Number = 0;
-        private var _rate:Number = 0.5;//2;
+        private var _rate:Number = 2;
 
         override public function create():void
         {
@@ -21,6 +21,9 @@ package
 
         override public function update():void
         {
+            if(!GameTracker.api)
+                (GameTracker.api = FlxG.stage.addChild(new KongApi()) as KongApi).init();
+
             _elapsed += FlxG.elapsed;
             if(_elapsed >= _rate) {
               FlxG.switchState(new BlackState());

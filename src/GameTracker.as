@@ -16,6 +16,8 @@ package
         //Items for this playthough in the inventory
         public var _items:Array;
 
+        public var _api:KongApi;
+
         private static var _instance:GameTracker = null;
         private static var _allItems:Array = [
             ItemBikelock,
@@ -74,6 +76,14 @@ package
 
         public static function set items(value:Array):void {
             instance._items = value;
+        }
+
+        public static function get api():KongApi {
+            return instance._api;
+        }
+
+        public static function set api(value:KongApi):void {
+            instance._api = value;
         }
 
         public static function generateItems():void {
