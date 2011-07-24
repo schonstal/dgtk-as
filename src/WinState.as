@@ -12,9 +12,16 @@ package
         private var _chest:ChestSprite;
         private var _rave:Rave;
         private var _darken:Darken;
+
         private var _timer:FlxText;
         private var _lives:FlxText;
         private var _keys:FlxText;
+        private var _continue:FlxText;
+
+        private var _continueTimer:Number = -2.5;
+        private var _continueThreshold:Number = 0.5;
+
+        private var _continueText:String = "PUSH X TO CONTINUE";
         
         override public function create():void
         {
@@ -46,6 +53,11 @@ package
             _t.setFormat("NES");
             _t.shadow = 0xff000000;
             add(_t);
+
+            _continue = new FlxText(0,205,256, "");
+            _continue.alignment = "center";
+            _continue.setFormat("NES");
+            add(_continue);
             
             _player = new Player(GameTracker.playerPos.x, GameTracker.playerPos.y);
             _player.heading = FlxObject.RIGHT;
@@ -72,6 +84,14 @@ package
 
         override public function update():void
         {
+            _continueTimer += FlxG.elapsed;
+            if(_continueTimer > _continueThreshold) {
+                _continueTimer = 0;
+                _continue.text = _continue.text == "" ? _continueText : "";
+            }
+            if(FlxG.keys.justPressed("X") || FlxG.keys.justPressed("SPACE")){
+                FlxG.switchState(new DiedOfState());
+            }
             super.update();
         } 
 	}
