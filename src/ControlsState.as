@@ -32,7 +32,7 @@ package
                 _elapsed += FlxG.elapsed;
                 if(_elapsed >= _startFlashRate) {
                     _elapsed = 0;
-                    _t.text = (_t.text == "" ? _startText : "");
+                    _t.text = _startText;
                 } 
             }
             super.update();
