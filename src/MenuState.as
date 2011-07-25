@@ -43,6 +43,23 @@ package
             _title = new TitleSprite();
             add(_title);
 
+            //Add sparkles :3
+            //Key
+            var twinkle:TwinkleSprite = new TwinkleSprite(19, 9, 20);
+            add(twinkle);
+            //E
+            twinkle = new TwinkleSprite(127, 63, 38);
+            add(twinkle);
+            //K
+            twinkle = new TwinkleSprite(47, 51, 49);
+            add(twinkle);
+            //!
+            twinkle = new TwinkleSprite(220, 53, 75);
+            add(twinkle);
+            //Y
+            twinkle = new TwinkleSprite(146, 51, 92);
+            add(twinkle);
+
             _t = new FlxText(0,186,256, "");
             _t.alignment = "center";
             _t.setFormat("NES");
