@@ -54,7 +54,7 @@ package
             _barRight = new BlackBarSprite(256, 48);
             add(_barRight);
 
-            _t = new FlxText(0,94,256, "YOU GOT THE KEY!");
+            _t = new FlxText(0,94,256, "I GOT THE KEY!");
             _t.alignment = "center";
             _t.setFormat("NES");
             _t.shadow = 0xff000000;

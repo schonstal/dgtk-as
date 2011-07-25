@@ -9,7 +9,7 @@ package
         public function ItemLockOfHair(slot:int) {
             super(slot);
             loadGraphic(ImgLockOfHair, true, true, 16, 16);
-            description = "IT'S A PUN";
+            description = "IT'S A PUN. HA HA.";
             name = "HAIR LOCK";
         }
     }

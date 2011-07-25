@@ -9,7 +9,7 @@ package
         public function ItemBikelock(slot:int) {
             super(slot);
             loadGraphic(ImgBikelock, true, true, 16, 16);
-            description = "WON'T OPEN WITHOUT A KEY";
+            description = "I CAN'T USE THIS WITHOUT A KEY.";
             name = "BIKE LOCK";
         }
     }

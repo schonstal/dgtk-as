@@ -9,7 +9,7 @@ package
         public function ItemLocket(slot:int) {
             super(slot);
             loadGraphic(ImgLocket, true, true, 16, 16);
-            description = "IT'S LOCKED SHUT";
+            description = "IT'S LOCKED SHUT.";
             name = "LOCKET";
         }
     }

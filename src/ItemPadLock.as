@@ -9,7 +9,7 @@ package
         public function ItemPadLock(slot:int) {
             super(slot);
             loadGraphic(ImgPadLock, true, true, 16, 16);
-            description = "YOU NEED AT LEAST ONE KEY TO USE THIS";
+            description = "I CAN'T USE THIS UNLESS I HAVE A KEY.";
             name = "PAD LOCK";
         }
     }

@@ -108,10 +108,12 @@ package
 
             _msgTimer += FlxG.elapsed;
             if(_typeMessage && _msgTimer >= _msgThreshold) {
-                _description.text += _itemList[selector].description.charAt(_index);
+                var c:String = _itemList[selector].description.charAt(_index);
+                var w:String = _words[_wordIndex];
+                _description.text += c;
                 
-                if(_words[_wordIndex] == "KEY" || _words[_wordIndex] == "KEYS")
-                    _hilight.text += _itemList[selector].description.charAt(_index);
+                if(w == "KEY" || w == "KEYS" || w == "KEYS." || w == "KEY.")
+                    _hilight.text += (c == '.' ? ' ' : c);
                 else
                     _hilight.text += ' ';
 

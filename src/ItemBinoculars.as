@@ -9,7 +9,7 @@ package
         public function ItemBinoculars(slot:int) {
             super(slot);
             loadGraphic(ImgBinoculars, true, true, 16, 16);
-            description = "THE LENS COVERS ARE LOCKED IN PLACE";
+            description = "THE LENS COVERS ARE LOCKED IN PLACE.";
             name = "BINOCULARS"
         }
     }
