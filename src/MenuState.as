@@ -6,6 +6,7 @@ package
     {
         [Embed(source="../data/Sounds_package.swf", symbol="menu.wav")] public var MenuSound:Class;
         [Embed(source="../data/Sounds_package.swf", symbol="start.wav")] public var StartSound:Class;
+        [Embed(source="../data/Music_package.swf", symbol="titlemusic_main.wav")] public var TitleMusic:Class;
 
         private var _elapsed:Number = 0;
         private var _startFlashRate:Number = 1;
@@ -31,6 +32,7 @@ package
         override public function create():void
         {
             FlxG.play(MenuSound);
+            //FlxG.playMusic(TitleMusic);
 
             _background = new BackgroundSprite();
             add(_background);

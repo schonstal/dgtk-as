@@ -4,7 +4,7 @@ package
 
     public class LogoState extends FlxState
     {
-        [Embed(source="../data/Sounds_package.swf", symbol="pickup_key.wav")] public var Ding:Class;
+        [Embed(source="../data/Sounds_package.swf", symbol="BaDing.wav")] public var Ding:Class;
 
         private var _elapsed:Number = 0;
         private var _rate:Number = 2;
