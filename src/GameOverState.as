@@ -84,7 +84,7 @@ package
             _key.floating = false;
             add(_key);
 
-            _ps = new FlxText(0,186,256, "");
+            _ps = new FlxText(0,170,256, "");
             _ps.alignment = "center";
             _ps.setFormat("NES");
             add(_ps);
@@ -107,7 +107,7 @@ package
                 _elapsed += FlxG.elapsed;
                 if(_elapsed >= _flashRate && !_gameOverSoundInstance.active) {
                     _elapsed = 0;
-                    _ps.text = (_ps.text == "" ? "PUSH X TO RETRY" : "");
+                    _ps.text = "PUSH X TO RETRY";
                 }
 
                 if(FlxG.keys.justPressed("X"))
