@@ -18,6 +18,7 @@ package
         private var _keys:FlxText;
         private var _itemName:FlxText;
         private var _description:FlxText;
+        private var _hilight:FlxText;
 
         private var _timer:TimerText;
 
@@ -52,6 +53,12 @@ package
             _description.alignment = "left";
             _description.setFormat("NES");
             add(_description); 
+
+            _hilight = new FlxText(32, 132, 192, "");
+            _hilight.alignment = "left";
+            _hilight.setFormat("NES");
+            _hilight.color = 0xfffeff33; 
+            add(_hilight); 
 
             _selectorSprite = new SelectorSprite();
             add(_selectorSprite);
@@ -102,10 +109,17 @@ package
             _msgTimer += FlxG.elapsed;
             if(_typeMessage && _msgTimer >= _msgThreshold) {
                 _description.text += _itemList[selector].description.charAt(_index);
+                
+                if(_words[_wordIndex] == "KEY" || _words[_wordIndex] == "KEYS")
+                    _hilight.text += _itemList[selector].description.charAt(_index);
+                else
+                    _hilight.text += ' ';
+
                 if(_itemList[selector].description.charAt(_index) == ' ') {
                     _wordIndex++;
                     if(_words[_wordIndex].length + _description.text.length >= (24 * _lineNo)) {
                         _description.text += "\n";
+                        _hilight.text += "\n";
                         _lineNo++;
                     }
                 }
@@ -156,6 +170,7 @@ package
         public function resetDescription():void {
             _typeMessage = false;
             _description.text = "";
+            _hilight.text = "";
             _index = 0;
             _wordIndex = 0;
             _lineNo = 1;
