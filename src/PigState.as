@@ -6,7 +6,7 @@ package
     public class PigState extends FlxState
     {
         private var _elapsed:Number = 0;
-        private var _rate:Number = 2;
+        private var _rate:Number = 3;
 
         override public function create():void
         {

@@ -5,7 +5,7 @@ package
     public class BlackState extends FlxState
     {
         private var _elapsed:Number = 0;
-        private var _rate:Number = 0.5;
+        private var _rate:Number = 1;
 
         override public function create():void
         {
@@ -17,6 +17,9 @@ package
             _elapsed += FlxG.elapsed;
             if(_elapsed >= _rate) {
                 switch(FlxG.level) {
+                    case 0:
+                        go(new LogoState());
+                        break;
                     case 1:
                         go(new PigState());
                         break;
