@@ -110,7 +110,7 @@ package
                     _ps.text = "PUSH X TO RETRY";
                 }
 
-                if(FlxG.keys.justPressed("X"))
+                if(FlxG.keys.justPressed("X") || FlxG.keys.justPressed("SPACE"))
                     FlxG.switchState(new MenuState());
             }
     
