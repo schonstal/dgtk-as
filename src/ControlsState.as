@@ -9,7 +9,7 @@ package
 
         private var _elapsed:Number = 0;
         private var _startFlashRate:Number = 1;
-        private var _startText:String = "PUSH X BUTTON";
+        private var _startText:String = "CLICK TO CONTINUE";
         private var _t:FlxText;
 
         override public function create():void
@@ -37,7 +37,7 @@ package
             }
             super.update();
             
-            if(FlxG.keys.justPressed("X")) {
+            if(FlxG.keys.justPressed("X") || FlxG.mouse.justPressed()) {
                 FlxG.fade(0xff000000, 1, function():void { FlxG.switchState(new BlackState()); });
             }
         }
