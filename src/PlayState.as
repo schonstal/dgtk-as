@@ -186,8 +186,8 @@ package
                 if(FlxG.keys.justPressed('X')) {
                     FlxG.play(LockedSound);
                     _activeMessage.text = "THIS "+msg+" IS LOCKED!\n" +
-                        "I NEED A     TO OPEN IT";
-                    _activeMessageKey.text = "         KEY           ";
+                        "YOU NEED A     TO OPEN IT";
+                    _activeMessageKey.text = "           KEY           ";
                     _messageActive = true;
                 }
                 return true;
