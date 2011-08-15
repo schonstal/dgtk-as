@@ -6,7 +6,7 @@ package
     {
         [Embed(source="../data/Sounds_package.swf", symbol="menu.wav")] public var MenuSound:Class;
         [Embed(source="../data/Sounds_package.swf", symbol="start.wav")] public var StartSound:Class;
-        [Embed(source="../data/Music_package.swf", symbol="titlemusic_main.wav")] public var TitleMusic:Class;
+        [Embed(source="../data/Music_package.swf", symbol="title.wav")] public var TitleMusic:Class;
 
         private var _elapsed:Number = 0;
         private var _startFlashRate:Number = 1;
@@ -32,7 +32,8 @@ package
         override public function create():void
         {
             FlxG.play(MenuSound);
-            //FlxG.playMusic(TitleMusic);
+            FlxG.playMusic(TitleMusic);
+            FlxG.music.volume = 0.75;
 
             _background = new BackgroundSprite();
             add(_background);
@@ -79,6 +80,7 @@ package
                 _t.text = (_t.text == "" ? _startText : "");
             }
             if(FlxG.keys.SPACE) {
+                FlxG.music.stop();
                 _t.text = _startText; //Just in case...
                 _t.flicker(_flickerThreshold);
                 remove(_title);
