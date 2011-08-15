@@ -129,7 +129,8 @@ package
             if(_walkTimer >= _walkThreshold && !_arrowsPressed)
                 _passiveMessage.text = "USE ARROWS TO MOVE";
 
-            GameTracker.timeRemaining -= FlxG.elapsed;
+            if(_player.mobile)
+                GameTracker.timeRemaining -= FlxG.elapsed;
 
             if(GameTracker.timeRemaining <= 0) {
                 FlxG.switchState(new WinState());
