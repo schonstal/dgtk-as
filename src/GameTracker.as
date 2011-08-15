@@ -87,19 +87,12 @@ package
         }
 
         public static function generateItems():void {
-            var newItems:Array = [];
-            for each (var it:Class in _allItems) { 
-                if(Math.random() > 0.3) {
-                    newItems.push(it);
-                }
-            }
-            newItems = newItems.sort(function(a:Class, b:Class):int {
+            _allItems = _allItems.sort(function(a:Class, b:Class):int {
                 return Math.round(Math.random()*2)-1;
             });
 
-            if(newItems.length > 8) {
-                newItems.splice(8, 100);
-            }
+            var newItems:Array = _allItems.concat();
+            newItems.splice(8, 100);
 
             items = newItems;
         } 
