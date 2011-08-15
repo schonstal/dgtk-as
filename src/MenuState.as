@@ -87,6 +87,7 @@ package
             if(FlxG.keys.SPACE) {
                 remove(_sparkles);
                 FlxG.music.stop();
+                FlxG.music.destroy();
                 _t.text = _startText; //Just in case...
                 _t.flicker(_flickerThreshold);
                 remove(_title);
