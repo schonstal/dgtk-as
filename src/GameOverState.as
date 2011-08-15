@@ -37,6 +37,8 @@ package
         override public function create():void
         {
             FlxG.play(Ding);
+            FlxG.music.stop();
+            FlxG.music.destroy();
 
             _background = new BackgroundSprite();
             _background.x = -256;

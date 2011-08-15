@@ -5,6 +5,7 @@ package
 	public class PlayState extends FlxState
 	{
         [Embed(source="../data/Sounds_package.swf", symbol="chest_locked.wav")] public var LockedSound:Class;
+        [Embed(source="../data/Music_package.swf", symbol="dungeon.wav")] public var DungeonMusic:Class;
 
         private var _player:Player;
         private var _key:KeySprite;
@@ -40,6 +41,9 @@ package
         {
             if(GameTracker.timeRemaining < 30)
                 _freshState = false;
+
+            if(_freshState)
+                FlxG.playMusic(DungeonMusic);
 
             //Add bg
             _background = new BackgroundSprite();
@@ -133,6 +137,8 @@ package
                 GameTracker.timeRemaining -= FlxG.elapsed;
 
             if(GameTracker.timeRemaining <= 0) {
+                FlxG.music.stop();
+                FlxG.music.destroy();
                 FlxG.switchState(new WinState());
             }
 
