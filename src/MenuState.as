@@ -29,6 +29,8 @@ package
 
         private var _startSoundInstance:FlxSound;
 
+        private var _sparkles:FlxGroup;
+
         override public function create():void
         {
             FlxG.play(MenuSound);
@@ -47,21 +49,24 @@ package
             add(_title);
 
             //Add sparkles :3
+            _sparkles = new FlxGroup();
             //Key
             var twinkle:TwinkleSprite = new TwinkleSprite(19, 9, 20);
-            add(twinkle);
+            _sparkles.add(twinkle);
             //E
             twinkle = new TwinkleSprite(127, 63, 38);
-            add(twinkle);
+            _sparkles.add(twinkle);
             //K
             twinkle = new TwinkleSprite(47, 51, 49);
-            add(twinkle);
+            _sparkles.add(twinkle);
             //!
             twinkle = new TwinkleSprite(220, 53, 75);
-            add(twinkle);
+            _sparkles.add(twinkle);
             //Y
             twinkle = new TwinkleSprite(146, 51, 92);
-            add(twinkle);
+            _sparkles.add(twinkle);
+
+            add(_sparkles);
 
             _t = new FlxText(0,186,256, "");
             _t.alignment = "center";
@@ -80,6 +85,7 @@ package
                 _t.text = (_t.text == "" ? _startText : "");
             }
             if(FlxG.keys.SPACE) {
+                remove(_sparkles);
                 FlxG.music.stop();
                 _t.text = _startText; //Just in case...
                 _t.flicker(_flickerThreshold);
