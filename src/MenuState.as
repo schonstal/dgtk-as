@@ -9,7 +9,6 @@ package
         [Embed(source="../data/Music_package.swf", symbol="title.wav")] public var TitleMusic:Class;
 
         private var _elapsed:Number = 0;
-        private var _startFlashRate:Number = 8;
         private var _startText:String = "PUSH SPACE BUTTON";
         private var _t:FlxText;
 
@@ -68,7 +67,7 @@ package
 
             add(_sparkles);
 
-            _t = new FlxText(0,186,256, "");
+            _t = new FlxText(0,186,256, _startText);
             _t.alignment = "center";
             _t.setFormat("NES");
             add(_t);
@@ -80,9 +79,7 @@ package
         override public function update():void
         {
             _elapsed += FlxG.elapsed;
-            if(_elapsed >= _startFlashRate) {
-                _t.text = _startText;
-            }
+
             if(FlxG.keys.SPACE) {
                 remove(_sparkles);
                 FlxG.music.stop();

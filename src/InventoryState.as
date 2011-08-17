@@ -31,6 +31,8 @@ package
         private var _wordIndex:uint = 0;
         private var _lineNo:uint = 1;
 
+        private var _keyWords:Array = ["KEY", "KEYS", "KEYS.", "KEY."];
+
         override public function create():void
         {
             _background = new BackgroundSprite(-256, 0);
@@ -112,7 +114,7 @@ package
                 var w:String = _words[_wordIndex];
                 _description.text += c;
                 
-                if(w == "KEY" || w == "KEYS" || w == "KEYS." || w == "KEY.")
+                if(_keyWords.indexOf(w) >= 0)
                     _hilight.text += (c == '.' ? ' ' : c);
                 else
                     _hilight.text += ' ';
@@ -143,6 +145,15 @@ package
                 } else if(_typeMessage) {
                     resetDescription();
                     _description.text = _itemList[selector].description;
+                    _words.forEach(function (word:String, index:int, array:Array):void {
+                        if ((_hilight.text.length + word.length) >= (24 * _lineNo)) {
+                            _hilight.text +='\n';
+                            _lineNo++;
+                        } else {
+                            _hilight.text += ' ';
+                        }
+                        _hilight.text += (_keyWords.indexOf(word) >= 0 ? word.replace(/\./g, ' ') : word.replace(/./g, ' '));
+                    });
                 } else {
                     resetDescription();
                 }
